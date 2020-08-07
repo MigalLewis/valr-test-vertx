@@ -32,6 +32,7 @@ class ValrTestApplicationTests {
 		assertTrue(context.containsBean("swaggerApi"));
 		assertTrue(context.containsBean("orderBookRepository"));
 		assertTrue(context.containsBean("orderBook"));
+		assertTrue(context.containsBean("orderBookMapper"));
 	}
 
 	@Test

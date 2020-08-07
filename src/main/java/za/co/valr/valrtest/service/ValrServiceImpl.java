@@ -9,7 +9,7 @@ import za.co.valr.valrtest.repository.OrderBookRepository;
 
 
 @Service("orderBook")
-public class OrderBookServiceImpl implements OrderBookService {
+public class ValrServiceImpl implements ValrService {
     private OrderBookRepository orderBookRepository;
     private OrderBookMapper orderBookMapper;
 

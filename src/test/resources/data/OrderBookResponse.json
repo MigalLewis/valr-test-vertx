@@ -1,50 +1,49 @@
 {
-  "currencyPair": "BTCZAR",
-  "Asks": [
+  "asks": [
     {
       "side": "sell",
       "quantity": "2.57680846",
-      "price": "215413",
+      "price": "215413.00",
       "currencyPair": "BTCZAR",
       "orderCount": 13
     },
     {
       "side": "sell",
       "quantity": "0.7574323",
-      "price": "215600",
+      "price": "215600.00",
       "currencyPair": "BTCZAR",
       "orderCount": 2
     },
     {
       "side": "sell",
       "quantity": "0.135339",
-      "price": "215601",
+      "price": "215601.00",
       "currencyPair": "BTCZAR",
       "orderCount": 1
     }
   ],
-  "Bids": [
+  "bids": [
     {
       "side": "buy",
       "quantity": "10.92911387",
-      "price": "215412",
+      "price": "215412.00",
       "currencyPair": "BTCZAR",
       "orderCount": 7
     },
     {
       "side": "buy",
       "quantity": "0.025",
-      "price": "214701",
+      "price": "214701.00",
       "currencyPair": "BTCZAR",
       "orderCount": 1
     },
     {
       "side": "buy",
       "quantity": "0.0349367",
-      "price": "214700",
+      "price": "214700.00",
       "currencyPair": "BTCZAR",
       "orderCount": 1
     }
   ],
-  "LastChange": "2020-08-07T06:54:18.261Z"
+  "lastChange": "2020-08-07T06:54:18.261Z"
 }

@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,14 +20,20 @@ import java.util.List;
 public class OrderBookEntity {
     @Id
     @Column
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column
     private String currencyPair;
+    @Column
     @JsonProperty("Asks")
-    @OneToMany(mappedBy="id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany( cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "order_book_id")
     private List<AskEntity> asks;
     @JsonProperty("Bids")
-    @OneToMany(mappedBy="id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true )
+    @JoinColumn(name = "order_book_id")
     private List<BidEntity> bids;
     @JsonProperty("LastChange")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")

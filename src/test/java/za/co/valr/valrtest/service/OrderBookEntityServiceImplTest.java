@@ -14,17 +14,13 @@ import za.co.valr.valrtest.repository.OrderBookRepository;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderBookEntityServiceImplTest {
-    private OrderBookServiceImpl orderBookService;
+    private ValrServiceImpl orderBookService;
     private OrderBookRepository orderBookRepository;
     private ObjectMapper objectMapper;
 
@@ -32,7 +28,7 @@ class OrderBookEntityServiceImplTest {
     void setUp() {
         this.objectMapper = new ObjectMapper();
         this.orderBookRepository = Mockito.mock(OrderBookRepository.class);
-        this.orderBookService = new OrderBookServiceImpl();
+        this.orderBookService = new ValrServiceImpl();
         this.orderBookService.setOrderBookRepository(orderBookRepository);
         this.orderBookService.setOrderBookMapper(Mappers.getMapper(OrderBookMapper.class));
     }

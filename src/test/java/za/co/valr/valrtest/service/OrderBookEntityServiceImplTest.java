@@ -49,13 +49,9 @@ class OrderBookEntityServiceImplTest {
         setAsks(expResult.getAsks());
         expResult.setBids(new ArrayList<>());
         setBids(expResult.getBids());
-        expResult.setLastChange(LocalDateTime.of(
-                                    LocalDate.of(2020, 8, 7),
-                                    LocalTime.parse("06:54:18.261",DateTimeFormatter.ISO_TIME))
-        );
+        expResult.setLastChange("2020-08-07T06:54:18.261Z");
         assertEquals(expResult, result);
     }
-
     File getFile(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
         return new File(classLoader.getResource("data/"+fileName).getFile());

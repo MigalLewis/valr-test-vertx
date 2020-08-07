@@ -11,6 +11,9 @@ by default the application runs on port http://localhost:8080
 ### Swagger
 you can find the swagger working documentation at http://localhost:8080/swagger-ui.html
 
+### Health Check
+you can see if the service is up and running by calling http://localhost:8080/actuator/health
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 

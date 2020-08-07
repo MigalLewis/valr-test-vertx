@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ValrTestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ValrTestApplication.class, args);
+		SpringApplication.run(ValrTestApplication.class);
 	}
 
 }

@@ -1,5 +1,7 @@
 package za.co.valr.valrtest;
 
+import org.assertj.core.api.Assert;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ class ValrTestApplicationTests {
 
 	@Test
 	void contextLoads() {
-			context.containsBean("swaggerApi");
+		assertTrue(context.containsBean("swaggerApi"));
 	}
 
 	@Test

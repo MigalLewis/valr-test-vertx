@@ -16,8 +16,7 @@ public class OrderBookServiceImpl implements OrderBookService {
     @Override
     public OrderBook getOrderBook(String currencyPair) {
         OrderBookEntity orderBookEntity = orderBookRepository.findByCurrencyPair(currencyPair);
-        OrderBook orderBookResponse = orderBookMapper.orderBookEntityToOrderBook(orderBookEntity);
-        return orderBookResponse;
+        return orderBookMapper.orderBookEntityToOrderBook(orderBookEntity);
     }
 
     @Autowired

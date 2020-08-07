@@ -6,6 +6,11 @@ To run the application you would first need to compile the code and then you can
 
 `java -jar target/valr-test-0.0.1-SNAPSHOT.jar`
 
+by default the application runs on port http://localhost:8080
+
+### Swagger
+you can find the swagger working documentation at http://localhost:8080/swagger-ui.html
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 

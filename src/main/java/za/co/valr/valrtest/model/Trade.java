@@ -6,7 +6,7 @@ import lombok.Data;
 public class Trade {
     private String id;
     private String price;
-    private double quantity;
+    private String quantity;
     private String currencyPair;
     private String tradedAt;
     private String takerSide;

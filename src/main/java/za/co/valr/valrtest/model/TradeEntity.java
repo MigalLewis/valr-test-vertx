@@ -1,5 +1,6 @@
 package za.co.valr.valrtest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,6 +25,7 @@ public class TradeEntity {
     @Column
     private String currencyPair;
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
     private LocalDateTime tradedAt;
     @Column
     private String takerSide;
@@ -31,4 +33,5 @@ public class TradeEntity {
     private int sequenceId;
     @Column
     private double quoteVolume;
+
 }

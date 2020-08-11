@@ -8,7 +8,7 @@ import za.co.valr.valrtest.model.OrderBook;
 import za.co.valr.valrtest.repository.OrderBookRepository;
 
 
-@Service("orderBook")
+@Service("valrService")
 public class ValrServiceImpl implements ValrService {
     private OrderBookRepository orderBookRepository;
     private OrderBookMapper orderBookMapper;

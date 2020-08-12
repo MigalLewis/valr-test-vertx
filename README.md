@@ -6,6 +6,10 @@ To run the application you would first need to compile the code and then you can
 
 `java -jar target/valr-test-0.0.1-SNAPSHOT.jar`
 
+or use spring boot maven plugin
+
+`mvn spring-boot:run`
+
 by default the application runs on port http://localhost:8080
 
 ### Swagger

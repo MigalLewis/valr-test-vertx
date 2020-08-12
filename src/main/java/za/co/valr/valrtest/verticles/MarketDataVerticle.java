@@ -25,8 +25,7 @@ public class MarketDataVerticle extends AbstractVerticle {
     public void start(Future<Void> fut) throws Exception {
         Vertx vertx = Vertx.factory.vertx();
         Router router = Router.router(vertx);
-        router.get("/:currencyPair/orderbook").handler(this::getOrderBook);
-        router.get("/:currencyPair/hello").handler(this::hello);
+        router.get("/v1/marketdata/:currencyPair/orderbook").handler(this::getOrderBook);
 
         vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", applicationConfiguration.httpPort()),
                 result -> {
@@ -44,10 +43,5 @@ public class MarketDataVerticle extends AbstractVerticle {
         res.setStatusCode(200).putHeader("content-type", "application/json").end(valrService.getOrderBook(currencyPair).toString());
     }
 
-    private void hello(RoutingContext routingContext) {
-        String currencyPair = routingContext.request().getParam("currencyPair");
-        HttpServerResponse res = routingContext.response();
-        res.setStatusCode(200).putHeader("content-type", "text").end("hello world");
-    }
 
 }

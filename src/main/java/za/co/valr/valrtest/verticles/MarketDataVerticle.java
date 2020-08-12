@@ -26,6 +26,7 @@ public class MarketDataVerticle extends AbstractVerticle {
         Vertx vertx = Vertx.factory.vertx();
         Router router = Router.router(vertx);
         router.get("/v1/marketdata/:currencyPair/orderbook").handler(this::getOrderBook);
+        router.get("/v1/marketdata/:currencyPair/tradehistory").handler(this::getAllTrades);
 
         vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", applicationConfiguration.httpPort()),
                 result -> {
@@ -41,6 +42,12 @@ public class MarketDataVerticle extends AbstractVerticle {
         String currencyPair = routingContext.request().getParam("currencyPair");
         HttpServerResponse res = routingContext.response();
         res.setStatusCode(200).putHeader("content-type", "application/json").end(marketDataService.getOrderBook(currencyPair).toString());
+    }
+
+    private void getAllTrades(RoutingContext routingContext) {
+        String currencyPair = routingContext.request().getParam("currencyPair");
+        HttpServerResponse res = routingContext.response();
+        res.setStatusCode(200).putHeader("content-type", "application/json").end(marketDataService.getAllTrades(currencyPair).toString());
     }
 
 

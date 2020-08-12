@@ -14,7 +14,7 @@ import za.co.valr.valrtest.repository.TradeRepository;
 import java.util.List;
 
 
-@Service("valrService")
+@Service("marketDataService")
 public class MarketDataServiceImpl implements MarketDataService {
     private OrderBookRepository orderBookRepository;
     private OrderBookMapper orderBookMapper;

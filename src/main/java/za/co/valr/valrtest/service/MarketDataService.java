@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface MarketDataService {
     OrderBook getOrderBook(String currencyPair) throws BadRequest, NotFound;
-    List<Trade> getAllTrades(String currencyPair);
+    List<Trade> getAllTrades(String currencyPair) throws BadRequest, NotFound;
 
 }

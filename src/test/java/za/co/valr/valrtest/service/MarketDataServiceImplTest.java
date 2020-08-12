@@ -41,7 +41,10 @@ class MarketDataServiceImplTest {
         this.orderBookService.setOrderBookMapper(Mappers.getMapper(OrderBookMapper.class));
         this.orderBookService.setTradeMapper(Mappers.getMapper(TradeMapper.class));
     }
-
+    @DisplayName("Given that an order book for BTCZAR is in the repository" +
+            "And I have BTCZAR as an input" +
+            "When I call getOrderBook" +
+            "Then the Order book for BTCZAR should be returned")
     @Test
     void getOrderBook() throws IOException, NotFound, BadRequest {
         OrderBookEntity orderBookEntity = objectMapper.readValue(getFile("Orderbook.json"), OrderBookEntity.class);
@@ -99,9 +102,12 @@ class MarketDataServiceImplTest {
             orderBookService.getOrderBook(null);
         });
     }
-
+    @DisplayName("Given that I have a trade history for BTCZAR is in the repository" +
+            "And I have BTCZAR as an input" +
+            "When I call getAllTrades" +
+            "Then the Trade History for BTCZAR should be returned")
     @Test
-    void getAllTrades() throws IOException {
+    void getAllTrades() throws IOException, NotFound, BadRequest {
         TypeReference<List<TradeEntity>> typeRef
                 = new TypeReference<List<TradeEntity>>() {};
         List<TradeEntity> trades = objectMapper.readValue(getFile("TradeHistory.json"), typeRef);
@@ -112,6 +118,67 @@ class MarketDataServiceImplTest {
         List<Trade> expResult = new ArrayList<>();
         setTrades(expResult);
         assertEquals(expResult, result);
+    }
+    @DisplayName("Given that I have a trade history for BTCZAR is in the repository" +
+            "And I have ETHZAR as an input" +
+            "When I call getAllTrades" +
+            "Then a Not Found Exception should be thrown")
+    @Test
+    void getAllTrades_notFound() throws IOException, NotFound, BadRequest {
+        TypeReference<List<TradeEntity>> typeRef
+                = new TypeReference<List<TradeEntity>>() {};
+        List<TradeEntity> trades = objectMapper.readValue(getFile("TradeHistory.json"), typeRef);
+        Mockito.when(tradeRepository.findByCurrencyPair("BTCZAR"))
+                .thenReturn(trades);
+
+        assertThrows(NotFound.class, () -> {
+            orderBookService.getAllTrades("ETHZAR");
+        });
+    }
+    @DisplayName("Given that I have no trade history for BTCZAR is in the repository" +
+            "And I have BTCZAR as an input" +
+            "When I call getAllTrades" +
+            "Then a Not Found Exception should be thrown")
+    @Test
+    void getAllTrades_notFound_empty_arraylist() throws IOException, NotFound, BadRequest {
+        Mockito.when(tradeRepository.findByCurrencyPair("BTCZAR"))
+                .thenReturn(new ArrayList<>());
+
+        assertThrows(NotFound.class, () -> {
+            orderBookService.getAllTrades("ETHZAR");
+        });
+    }
+    @DisplayName("Given that I have a trade history  for BTCZAR is in the repository" +
+            "And I have empty input" +
+            "When I call getAllTrades" +
+            "Then a Bad Request Exception should be thrown")
+    @Test
+    void getAllTrades_empty() throws IOException, NotFound, BadRequest {
+        TypeReference<List<TradeEntity>> typeRef
+                = new TypeReference<List<TradeEntity>>() {};
+        List<TradeEntity> trades = objectMapper.readValue(getFile("TradeHistory.json"), typeRef);
+        Mockito.when(tradeRepository.findByCurrencyPair("BTCZAR"))
+                .thenReturn(trades);
+
+        assertThrows(BadRequest.class, () -> {
+            orderBookService.getAllTrades("");
+        });
+    }
+    @DisplayName("Given that I have a trade history  for BTCZAR is in the repository" +
+            "And I have null input" +
+            "When I call getAllTrades" +
+            "Then a Bad Request Exception should be thrown")
+    @Test
+    void getAllTrades_null() throws IOException, NotFound, BadRequest {
+        TypeReference<List<TradeEntity>> typeRef
+                = new TypeReference<List<TradeEntity>>() {};
+        List<TradeEntity> trades = objectMapper.readValue(getFile("TradeHistory.json"), typeRef);
+        Mockito.when(tradeRepository.findByCurrencyPair("BTCZAR"))
+                .thenReturn(trades);
+
+        assertThrows(BadRequest.class, () -> {
+            orderBookService.getAllTrades(null);
+        });
     }
 
     File getFile(String fileName) {

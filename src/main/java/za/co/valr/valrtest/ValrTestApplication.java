@@ -4,6 +4,7 @@ import io.vertx.core.Vertx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import za.co.valr.valrtest.verticles.ExchangeVerticle;
 import za.co.valr.valrtest.verticles.MarketDataVerticle;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,9 @@ public class ValrTestApplication {
 	@Autowired
 	private MarketDataVerticle marketDataVerticle;
 
+	@Autowired
+	private ExchangeVerticle exchangeVerticle;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ValrTestApplication.class,args);
 	}
@@ -21,6 +25,7 @@ public class ValrTestApplication {
 	@PostConstruct
 	public void deployVerticle() {
 		Vertx.vertx().deployVerticle(marketDataVerticle);
+		Vertx.vertx().deployVerticle(exchangeVerticle);
 	}
 
 }

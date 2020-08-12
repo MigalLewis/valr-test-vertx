@@ -55,7 +55,13 @@ public class MarketDataVerticle extends AbstractVerticle {
     private void getAllTrades(RoutingContext routingContext) {
         String currencyPair = routingContext.request().getParam("currencyPair");
         HttpServerResponse res = routingContext.response();
-        res.setStatusCode(200).putHeader("content-type", "application/json").end(marketDataService.getAllTrades(currencyPair).toString());
+        try {
+            res.setStatusCode(200).putHeader("content-type", "application/json").end(marketDataService.getAllTrades(currencyPair).toString());
+        } catch (BadRequest badRequest) {
+            res.setStatusCode(400).setStatusMessage(badRequest.getMessage()).end(badRequest.getMessage());
+        } catch (NotFound notFound) {
+            res.setStatusCode(404).setStatusMessage(notFound.getMessage()).end(notFound.getMessage());
+        }
     }
 
 

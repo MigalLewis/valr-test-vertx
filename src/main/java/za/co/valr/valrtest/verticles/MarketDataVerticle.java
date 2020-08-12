@@ -9,7 +9,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.co.valr.valrtest.config.ApplicationConfiguration;
-import za.co.valr.valrtest.service.ValrService;
+import za.co.valr.valrtest.service.MarketDataService;
 
 @Component
 public class MarketDataVerticle extends AbstractVerticle {
@@ -18,7 +18,7 @@ public class MarketDataVerticle extends AbstractVerticle {
     private ApplicationConfiguration applicationConfiguration;
 
     @Autowired
-    private ValrService valrService;
+    private MarketDataService marketDataService;
 
 
     @Override
@@ -40,7 +40,7 @@ public class MarketDataVerticle extends AbstractVerticle {
     private void getOrderBook(RoutingContext routingContext) {
         String currencyPair = routingContext.request().getParam("currencyPair");
         HttpServerResponse res = routingContext.response();
-        res.setStatusCode(200).putHeader("content-type", "application/json").end(valrService.getOrderBook(currencyPair).toString());
+        res.setStatusCode(200).putHeader("content-type", "application/json").end(marketDataService.getOrderBook(currencyPair).toString());
     }
 
 
